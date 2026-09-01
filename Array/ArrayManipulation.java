@@ -1,12 +1,16 @@
 package Array;
 
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 
 public class ArrayManipulation {
     public static void main(String[] args) {
-        // int[] arr = { 1, 2, 3, 4, 5, 6 };
-        int[] arr = { 1, 2, 2, 3, 3, 3, 3, 4, 4, 5, 5, 5, 5, 5, 5 };
-        highestAndLowestFreq(arr);
+        int[] arr1 = { 1, 2, 3, 4, 5, 6 };
+        int[] arr2 = { 2, 4, 5, 6, 7, 8, 9 };
+        LinkedHashSet<Integer> result = unionOfTwoArrays(arr1, arr2);
+        System.out.println(result);
+        // int[] arr = { 1, 2, 2, 3, 3, 3, 3, 4, 4, 5, 5, 5, 5, 5, 5 };
+        // highestAndLowestFreq(arr);
         // int result = getMode(arr);
         // System.out.println(result);
         // int[] arr = {};
@@ -119,5 +123,16 @@ public class ArrayManipulation {
             }
         }
         System.out.println("highest freq is : " + highfreqElem + " and Lowest freq is : " + lowFreqElem);
+    }
+
+    static LinkedHashSet<Integer> unionOfTwoArrays(int[] arr1, int[] arr2) {
+        LinkedHashSet<Integer> set = new LinkedHashSet<>();
+        for (int i : arr1) {
+            set.add(i);
+        }
+        for (int i : arr2) {
+            set.add(i);
+        }
+        return set;
     }
 }
