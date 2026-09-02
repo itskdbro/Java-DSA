@@ -5,10 +5,13 @@ import java.util.LinkedHashSet;
 
 public class ArrayManipulation {
     public static void main(String[] args) {
-        int[] arr1 = { 1, 2, 3, 4, 5, 6 };
-        int[] arr2 = { 2, 4, 5, 6, 7, 8, 9 };
-        LinkedHashSet<Integer> result = unionOfTwoArrays(arr1, arr2);
-        System.out.println(result);
+        // int[] arr1 = { 1, 2, 3, 4, 5, 6 };
+        // int[] arr2 = { 2, 4, 5, 6, 7, 8, 9 };
+        // LinkedHashSet<Integer> result = unionOfTwoArrays(arr1, arr2);
+        // System.out.println(result);
+        // int arr[] = { 0, 1, 1, 0, 1, 0 };
+        // int[] result = sortZerosAndOnes(arr);
+
         // int[] arr = { 1, 2, 2, 3, 3, 3, 3, 4, 4, 5, 5, 5, 5, 5, 5 };
         // highestAndLowestFreq(arr);
         // int result = getMode(arr);
@@ -21,7 +24,9 @@ public class ArrayManipulation {
         // for (int i : result) {
         // System.out.println(i);
         // }
-
+        int[] arrr = { 5, 6, 0, 2, 4, 1, 8, 7 };
+        int num = 8;
+        System.out.println(missingNum(arrr, num));
     }
 
     static int[] reverseArray(int[] arr, int start, int end) {
@@ -134,5 +139,41 @@ public class ArrayManipulation {
             set.add(i);
         }
         return set;
+    }
+
+    static int[] sortZerosAndOnes(int[] arr) {
+        // TC = O(n) ,SC = O(1)
+        int n = arr.length;
+        int i = 0;
+        int j = n - 1;
+
+        while (i < j) {
+            if (arr[i] == 1 && arr[j] == 0) {
+                // swap
+                arr[i] = 0;
+                arr[j] = 1;
+                i++;
+                j--;
+            }
+            if (arr[i] == 0) {
+                i++;
+            }
+            if (arr[j] == 1) {
+                j--;
+            }
+
+        }
+        return arr;
+    }
+
+    static int missingNum(int[] arr, int num) {
+        // TC = O(n), SC = O(1)
+        int totalSum = num*(num+1)/2;
+        int arrSum = 0;
+       
+        for (int i : arr) {
+            arrSum = arrSum + i;
+        }
+        return totalSum - arrSum;
     }
 }
