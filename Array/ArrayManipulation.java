@@ -168,12 +168,27 @@ public class ArrayManipulation {
 
     static int missingNum(int[] arr, int num) {
         // TC = O(n), SC = O(1)
-        int totalSum = num*(num+1)/2;
-        int arrSum = 0;
-       
-        for (int i : arr) {
-            arrSum = arrSum + i;
+
+        // Method -1 (Normal math sum)
+        // int totalSum = num*(num+1)/2;
+        // int arrSum = 0;
+
+        // for (int i : arr) {
+        // arrSum = arrSum + i;
+        // }
+        // return totalSum - arrSum;
+
+        // Method -2 (XOR Sum)
+        int xorSum = 0;
+
+        for (int n : arr) {
+            xorSum = xorSum ^ n;
         }
-        return totalSum - arrSum;
+        for (int i = 0; i <= num; i++) {
+            xorSum = xorSum ^ i;
+        }
+
+        return xorSum;
+
     }
 }
