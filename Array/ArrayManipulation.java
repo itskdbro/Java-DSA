@@ -24,9 +24,22 @@ public class ArrayManipulation {
         // for (int i : result) {
         // System.out.println(i);
         // }
-        int[] arrr = { 5, 6, 0, 2, 4, 1, 8, 7 };
-        int num = 8;
-        System.out.println(missingNum(arrr, num));
+        // int[] arrr = { 5, 6, 0, 2, 4, 1, 8, 7 };
+        // int num = 8;
+        // System.out.println(missingNum(arrr, num));
+        // int[] arr = { 2, 3, 5, 4, 5, 3, 4 };
+        // System.out.println(uniqueElem(arr));
+        // int[] arr = { 2, 1, 0, 0, 1, 2, 0 };
+        // int[] result = sortZerosOnesAndTwos(arr);
+        // for (int i : result) {
+        // System.out.println(i);
+        // }
+
+        int[] arr = { -1, -2, -3, -4, -5 };
+        int[] result = twoSum(arr, -8);
+        for (int i : result) {
+            System.out.println(i);
+        }
     }
 
     static int[] reverseArray(int[] arr, int start, int end) {
@@ -189,6 +202,93 @@ public class ArrayManipulation {
         }
 
         return xorSum;
+
+    }
+
+    static int uniqueElem(int[] arr) {
+        int xorSum = 0;
+        for (int i : arr) {
+            xorSum = xorSum ^ i;
+        }
+        return xorSum;
+    }
+
+    static int[] sortZerosOnesAndTwos(int[] arr) {
+        // TC = O(n), SC = O(1)
+
+        // Brute force approach
+
+        // int zeroCount = 0;
+        // int oneCount = 0;
+        // int twoCount = 0;
+        // for (int i : arr) {
+        // if (i == 0)
+        // zeroCount++;
+        // else if (i == 1)
+        // oneCount++;
+        // else
+        // twoCount++;
+
+        // }
+        // int index = 0;
+        // while (zeroCount-- > 0) {
+        // arr[index++] = 0;
+        // }
+        // while (oneCount-- > 0) {
+        // arr[index++] = 1;
+        // }
+        // while (twoCount-- > 0) {
+        // arr[index++] = 2;
+        // }
+
+        // Optimal solution
+        int low = 0;
+        int mid = 0;
+        int high = arr.length - 1;
+        int temp = 0;
+
+        while (mid <= high) {
+            if (arr[mid] == 0) {
+                temp = arr[mid];
+                arr[mid] = arr[low];
+                arr[low] = temp;
+                low++;
+                mid++;
+            } else if (arr[mid] == 1) {
+                mid++;
+            } else {
+                temp = arr[mid];
+                arr[mid] = arr[high];
+                arr[high] = temp;
+                high--;
+            }
+        }
+        return arr;
+    }
+
+    static int[] twoSum(int[] arr, int target) {
+
+        // Brute force approach -- TC = O(n^2) , SC = 0(1)
+        // for (int i = 0; i < arr.length - 1; i++) {
+        // for (int j = i + 1; j < arr.length; j++) {
+        // if ((arr[i] + arr[j]) == target) {
+        // return new int[] { i, j };
+        // }
+        // }
+        // }
+        // return new int[] {};
+
+        // Optimal solution using hashmap --
+        HashMap<Integer, Integer> result = new HashMap<>();
+        for (int i = 0; i < arr.length; i++) {
+            int needed = target - arr[i];
+            if (result.containsKey(needed)) {
+                return new int[] { result.get(needed), i };
+            }
+            result.put(arr[i], i);
+
+        }
+        return new int[] {};
 
     }
 }
